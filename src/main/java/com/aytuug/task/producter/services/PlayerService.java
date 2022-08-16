@@ -1,6 +1,8 @@
 package com.aytuug.task.producter.services;
 
 
+import com.aytuug.task.producter.dto.PlayerDto;
+import com.aytuug.task.producter.dto.converter.PlayerDtoConverter;
 import com.aytuug.task.producter.entity.Player;
 import com.aytuug.task.producter.entity.Position;
 import com.aytuug.task.producter.repository.PlayerRepository;
@@ -8,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,6 +18,7 @@ import java.util.List;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final PlayerDtoConverter playerDtoConverter;
 
     public Player savePlayer(String firstName, String lastName, Position position){
         Player player = new Player();
@@ -30,8 +34,13 @@ public class PlayerService {
         ResponseEntity.ok().build();
     }
 
-    public List<Player> findAllPlayers(){
-        return playerRepository.findAll();
+    public List<PlayerDto> findAllPlayers(){
+        List<Player> playerList = playerRepository.findAll();
+        List<PlayerDto> playerDtoList = new ArrayList<>();
+        for (Player player : playerList){
+            playerDtoList.add(playerDtoConverter.convert(player));
+        }
+        return playerDtoList;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.aytuug.task.producter.controller;
 
+import com.aytuug.task.producter.dto.PlayerDto;
 import com.aytuug.task.producter.entity.Player;
 import com.aytuug.task.producter.entity.Position;
 import com.aytuug.task.producter.requests.PlayerRequest;
@@ -20,7 +21,7 @@ public class PlayerController {
     private final PlayerService playerService;
 
     @QueryMapping
-    public List<Player> findAllPlayers(){
+    public List<PlayerDto> findAllPlayers(){
         return playerService.findAllPlayers();
     }
 

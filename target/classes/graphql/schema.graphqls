@@ -5,6 +5,12 @@ type Player {
     position : Position
 }
 
+type PlayerDto{
+    firstName: String,
+    lastName: String,
+    position: String
+}
+
 enum Position {
     PG,
     SG,
@@ -14,7 +20,7 @@ enum Position {
 }
 
 type Query{
-    findAllPlayers: [Player]!
+    findAllPlayers: [PlayerDto]!
 }
 
 type Mutation{
