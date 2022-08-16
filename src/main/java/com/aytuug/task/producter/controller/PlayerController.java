@@ -22,7 +22,9 @@ public class PlayerController {
 
     @QueryMapping
     public List<PlayerDto> findAllPlayers(){
+        System.out.println(playerService.findAllPlayers().size());
         return playerService.findAllPlayers();
+
     }
 
     @MutationMapping

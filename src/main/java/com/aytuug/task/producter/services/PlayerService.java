@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,15 @@ public class PlayerService {
         player.setFirstName(firstName);
         player.setLastName(lastName);
         player.setPosition(position);
-        playerRepository.save(player);
+
+        //basketball team has maximum capacity during. => 5
+        if (playerRepository.findAll().size() < 5){
+            System.out.println(playerRepository.findAll().size());
+            playerRepository.save(player);
+        }else{
+            throw new RuntimeException("basketball team has maximum capacity during. => 5");
+        }
+
         return player;
     }
 
